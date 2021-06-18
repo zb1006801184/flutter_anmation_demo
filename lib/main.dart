@@ -3,7 +3,6 @@ import 'package:flutter_anmation_demo/combined_Animation/combined_animation_page
 import 'package:flutter_anmation_demo/custom_painter/custom_painter_page.dart';
 import 'package:flutter_anmation_demo/explicit_anmation/explicit_anmation_page.dart';
 import 'package:flutter_anmation_demo/hero_anmation/hero_anmation_page.dart';
-import 'package:flutter_anmation_demo/home_page.dart';
 import 'package:flutter_anmation_demo/implicit_anmation/implicit_anmation.dart';
 import 'package:flutter_anmation_demo/physics_anmation/physics_anmation_page.dart';
 import 'package:flutter_anmation_demo/physics_anmation/physics_anmation_page2.dart';
