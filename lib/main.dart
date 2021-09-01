@@ -112,6 +112,7 @@ class _MyHomePageState extends State<MyHomePage> {
     //创建子isolate，传入 入口函数 和 接受者sendPort  ，子isolate可使用该sendPort向主isolate发送消息
     Isolate myIsolateInstance = await Isolate.spawn(myIsolate, isolateToMainStream.sendPort);
     return completer.future;
+    //1
   }
 
 //子Isolate的入口函数，可以在该函数中做耗时操作
