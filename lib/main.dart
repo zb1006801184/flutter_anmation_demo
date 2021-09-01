@@ -95,20 +95,21 @@ class _MyHomePageState extends State<MyHomePage> {
 //   static getMsg(sendPort) => sendPort.send("hello");
 
 //双向通信
-
   Future<SendPort> initIsolate() async {
     Completer completer = new Completer<SendPort>();
+    //主isolate中的接收者（接收子isolate中发送的消息）
     ReceivePort isolateToMainStream = ReceivePort();
-
+    //接受者的监听
     isolateToMainStream.listen((data) {
       if (data is SendPort) {
+        //接收到子isolate中创建的 SendPort，可使用该SendPort向子isolate发送消息
         SendPort mainToIsolateStream = data;
         completer.complete(mainToIsolateStream);
       } else {
         print('[isolateToMainStream] $data');
       }
     });
-
+    //创建子isolate，传入 入口函数 和 接受者sendPort  ，子isolate可使用该sendPort向主isolate发送消息
     Isolate myIsolateInstance = await Isolate.spawn(myIsolate, isolateToMainStream.sendPort);
     return completer.future;
   }
@@ -124,6 +125,12 @@ class _MyHomePageState extends State<MyHomePage> {
     });
 
     isolateToMainStream.send('This is from myIsolate()');
+  }
+
+  void start() async {
+    SendPort mainToIsolateStream = await initIsolate();
+    //接收到子ioslate中的 SendPort   可向子isolate中发送消息
+    mainToIsolateStream.send('This is from main()');
   }
 
   void _itemClick({int index}) {
