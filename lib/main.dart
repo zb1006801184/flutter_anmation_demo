@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_anmation_demo/animated_builder_demo/animated_builder_demo.dart';
 import 'package:flutter_anmation_demo/combined_Animation/combined_animation_page.dart';
 import 'package:flutter_anmation_demo/custom_painter/custom_painter_page.dart';
 import 'package:flutter_anmation_demo/explicit_anmation/explicit_anmation_page.dart';
@@ -59,7 +58,6 @@ class _MyHomePageState extends State<MyHomePage> {
     'CustomPainter',
     'AnimateWidget',
     'TweenAnimatedBuilder',
-    'AnimaterBuilderDemo',
   ];
   List _pages = [
     ImplicitAnmationPage(),
@@ -71,7 +69,6 @@ class _MyHomePageState extends State<MyHomePage> {
     CustomPainrerPage(),
     AnimateWidgetDemo(),
     TweenAnimatedBuilderDemo(),
-    AnimaterBuilderDemo(),
   ];
 
   void _itemClick({int index}) {
