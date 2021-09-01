@@ -113,6 +113,7 @@ class _MyHomePageState extends State<MyHomePage> {
     Isolate myIsolateInstance = await Isolate.spawn(myIsolate, isolateToMainStream.sendPort);
     return completer.future;
     //1
+    //2
   }
 
 //子Isolate的入口函数，可以在该函数中做耗时操作
