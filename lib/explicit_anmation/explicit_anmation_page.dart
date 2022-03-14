@@ -7,39 +7,52 @@ class ExplicitAnmationPage extends StatefulWidget {
   _ExplicitAnmationPageState createState() => _ExplicitAnmationPageState();
 }
 
-class _ExplicitAnmationPageState extends State<ExplicitAnmationPage> with TickerProviderStateMixin {
-  Animation anmationSlideTransition;
-  AnimationController controllSlideTransition;
+class _ExplicitAnmationPageState extends State<ExplicitAnmationPage>
+    with TickerProviderStateMixin {
+  late Animation<Offset> anmationSlideTransition;
+  late AnimationController controllSlideTransition;
 
-  Animation anmationFadeTransition;
-  AnimationController controllFadeTransition;
+  late Animation<double> anmationFadeTransition;
+  late AnimationController controllFadeTransition;
 
-  Animation anmationRotationTransition;
-  AnimationController controllRotationTransition;
+  late Animation<double> anmationRotationTransition;
+  late AnimationController controllRotationTransition;
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
     // SlideTransition
-    controllSlideTransition = AnimationController(vsync: this, duration: Duration(milliseconds: 1000));
+    controllSlideTransition = AnimationController(
+        vsync: this, duration: Duration(milliseconds: 1000));
     // final ss = CurvedAnimation(parent: controllSlideTransition, curve: Curves.easeIn);
-    anmationSlideTransition = Tween(begin: Offset.zero, end: Offset(1.0, 0.0)).animate(controllSlideTransition);
+    anmationSlideTransition = Tween(begin: Offset.zero, end: Offset(1.0, 0.0))
+        .animate(controllSlideTransition);
 
     //FadeTransition
-    controllFadeTransition = AnimationController(vsync: this, duration: Duration(seconds: 1));
-    anmationFadeTransition = Tween(begin: 1.0, end: 0.0).animate(controllFadeTransition);
+    controllFadeTransition =
+        AnimationController(vsync: this, duration: Duration(seconds: 1));
+    anmationFadeTransition =
+        Tween(begin: 1.0, end: 0.0).animate(controllFadeTransition);
 
     //RotationTransition
-    controllRotationTransition = AnimationController(vsync: this, duration: Duration(seconds: 1));
-    anmationRotationTransition = Tween(begin: 0.0, end: 1.0).animate(controllRotationTransition);
+    controllRotationTransition =
+        AnimationController(vsync: this, duration: Duration(seconds: 1));
+    anmationRotationTransition =
+        Tween(begin: 0.0, end: 1.0).animate(controllRotationTransition);
   }
 
   void _animate() {
-    controllSlideTransition.status == AnimationStatus.completed ? controllSlideTransition.reset() : controllSlideTransition.forward();
+    controllSlideTransition.status == AnimationStatus.completed
+        ? controllSlideTransition.reset()
+        : controllSlideTransition.forward();
 
-    controllFadeTransition.status == AnimationStatus.completed ? controllFadeTransition.reset() : controllFadeTransition.forward();
+    controllFadeTransition.status == AnimationStatus.completed
+        ? controllFadeTransition.reset()
+        : controllFadeTransition.forward();
 
-    controllRotationTransition.status == AnimationStatus.completed ? controllRotationTransition.reset() : controllRotationTransition.forward();
+    controllRotationTransition.status == AnimationStatus.completed
+        ? controllRotationTransition.reset()
+        : controllRotationTransition.forward();
   }
 
   @override

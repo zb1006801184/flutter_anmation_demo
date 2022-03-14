@@ -7,8 +7,8 @@ class AnimateWidgetDemo extends StatefulWidget {
 }
 
 class _AnimateWidgetDemotate extends State<AnimateWidgetDemo> with SingleTickerProviderStateMixin {
-  AnimationController controller;
-  Animation<double> animation;
+  late AnimationController controller;
+  late Animation<double> animation;
 
   initState() {
     super.initState();
@@ -48,10 +48,10 @@ class _AnimateWidgetDemotate extends State<AnimateWidgetDemo> with SingleTickerP
 }
 
 class AnimatedZoomLogo extends AnimatedWidget {
-  AnimatedZoomLogo({Key key, Animation<double> animation}) : super(key: key, listenable: animation);
+  AnimatedZoomLogo({Key? key,  required Animation<double> animation}) : super(key: key, listenable: animation);
 
   Widget build(BuildContext context) {
-    final Animation<double> animation = listenable;
+    final Animation<double> animation = listenable as Animation<double>;
     return new Center(
       child: new Container(
         margin: new EdgeInsets.symmetric(vertical: 10.0),

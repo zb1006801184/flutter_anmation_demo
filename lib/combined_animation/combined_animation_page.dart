@@ -5,13 +5,14 @@ class CombinedAnimationPage extends StatefulWidget {
   _CombinedAnimationPageState createState() => _CombinedAnimationPageState();
 }
 
-class _CombinedAnimationPageState extends State<CombinedAnimationPage> with TickerProviderStateMixin {
-  AnimationController _controller;
-  Animation<double> _width;
-  Animation<double> _height;
-  Animation<Color> _color;
-  Animation<double> _border;
-  Animation<BorderRadius> _borderRadius;
+class _CombinedAnimationPageState extends State<CombinedAnimationPage>
+    with TickerProviderStateMixin {
+  late AnimationController _controller;
+  late Animation<double?> _width;
+  late Animation<double?> _height;
+  late Animation<Color?> _color;
+  late Animation<double?> _border;
+  late Animation<BorderRadius?> _borderRadius;
 
   void _play() {
     if (_controller.isCompleted) {
@@ -104,7 +105,7 @@ class _CombinedAnimationPageState extends State<CombinedAnimationPage> with Tick
       body: Center(
         child: AnimatedBuilder(
           animation: _controller,
-          builder: (BuildContext context, Widget child) {
+          builder: (BuildContext context, Widget? child) {
             return Container(
               width: _width.value,
               height: _height.value,

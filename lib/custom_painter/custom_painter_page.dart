@@ -9,8 +9,8 @@ class CustomPainrerPage extends StatefulWidget {
 
 class _CustomPainrerPageState extends State<CustomPainrerPage>
     with SingleTickerProviderStateMixin {
-  AnimationController _controller;
-  Animation _animation;
+  late AnimationController _controller;
+  late Animation _animation;
   @override
   void initState() {
     _controller =

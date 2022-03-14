@@ -74,74 +74,13 @@ class _MyHomePageState extends State<MyHomePage> {
     TweenAnimatedBuilderDemo(),
   ];
 
-  ///单向调用
-/////在父Isolate中调用
-//   Isolate isolate;
-//   start() async {
-//     ReceivePort receivePort = ReceivePort();
-//     //创建子Isolate对象
-//     isolate = await Isolate.spawn(getMsg, receivePort.sendPort);
-//     //监听子Isolate的返回数据
-//     receivePort.listen((data) {
-//       print('data：$data');
-//       receivePort.close();
-//       //关闭Isolate对象
-//       isolate?.kill(priority: Isolate.immediate);
-//       isolate = null;
-//     });
-//   }
 
-// //子Isolate对象的入口函数，可以在该函数中做耗时操作
-//   static getMsg(sendPort) => sendPort.send("hello");
-
-//双向通信
-  Future<SendPort> initIsolate() async {
-    Completer completer = new Completer<SendPort>();
-    //主isolate中的接收者（接收子isolate中发送的消息）
-    ReceivePort isolateToMainStream = ReceivePort();
-    //接受者的监听
-    isolateToMainStream.listen((data) {
-      if (data is SendPort) {
-        //接收到子isolate中创建的 SendPort，可使用该SendPort向子isolate发送消息
-        SendPort mainToIsolateStream = data;
-        completer.complete(mainToIsolateStream);
-      } else {
-        print('[isolateToMainStream] $data');
-      }
-    });
-    //创建子isolate，传入 入口函数 和 接受者sendPort  ，子isolate可使用该sendPort向主isolate发送消息
-    Isolate myIsolateInstance = await Isolate.spawn(myIsolate, isolateToMainStream.sendPort);
-    return completer.future;
-    //1
-    //2
-    //3
-  }
-
-//子Isolate的入口函数，可以在该函数中做耗时操作
-//_isolate必须是顶级函数（不能存在任何类中）或者是静态函数（可以存在类中）
-  static void myIsolate(SendPort isolateToMainStream) {
-    ReceivePort mainToIsolateStream = ReceivePort();
-    isolateToMainStream.send(mainToIsolateStream.sendPort);
-
-    mainToIsolateStream.listen((data) {
-      print('[mainToIsolateStream] $data');
-    });
-
-    isolateToMainStream.send('This is from myIsolate()');
-  }
-
-  void start() async {
-    SendPort mainToIsolateStream = await initIsolate();
-    //接收到子ioslate中的 SendPort   可向子isolate中发送消息
-    mainToIsolateStream.send('This is from main()');
-  }
-
-  void _itemClick({int index}) {
+  void _itemClick({required int index}) {
     print(_titles[index]);
     Navigator.of(context).push(MaterialPageRoute(builder: (context) => _pages[index]));
   }
 
-  Widget _itemWidget({int index}) {
+  Widget _itemWidget({required int index}) {
     if (index == 2) {
       return GestureDetector(
         child: Hero(

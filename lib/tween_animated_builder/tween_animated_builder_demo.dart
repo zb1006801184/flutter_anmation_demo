@@ -1,9 +1,8 @@
-import 'dart:ffi';
 
 import 'package:flutter/material.dart';
 
 class TweenAnimatedBuilderDemo extends StatefulWidget {
-  const TweenAnimatedBuilderDemo({Key key}) : super(key: key);
+  const TweenAnimatedBuilderDemo({Key? key}) : super(key: key);
 
   @override
   _TweenAnimatedBuilderDemoState createState() => _TweenAnimatedBuilderDemoState();
@@ -27,7 +26,7 @@ class _TweenAnimatedBuilderDemoState extends State<TweenAnimatedBuilderDemo> {
         child: TweenAnimationBuilder(
           tween: Tween<double>(begin: 0, end: _value),
           duration: Duration(seconds: 1),
-          builder: (BuildContext context, double value, Widget child) {
+          builder: (BuildContext context, double value, Widget? child) {
             return Container(
               width: value,
               height: value,
