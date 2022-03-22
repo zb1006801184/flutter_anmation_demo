@@ -1,6 +1,6 @@
 # flutter_anmation_demo
 
-A new Flutter project.
+一个关于flutter动画的demo项目
 
 ## Getting Started
 

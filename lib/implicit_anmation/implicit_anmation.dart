@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+///隐式动画
 class ImplicitAnmationPage extends StatefulWidget {
   @override
   _ImplicitAnmationPageState createState() => _ImplicitAnmationPageState();

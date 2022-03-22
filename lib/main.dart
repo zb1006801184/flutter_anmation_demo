@@ -9,6 +9,7 @@ import 'package:flutter_anmation_demo/hero_anmation/hero_anmation_page.dart';
 import 'package:flutter_anmation_demo/implicit_anmation/implicit_anmation.dart';
 import 'package:flutter_anmation_demo/physics_anmation/physics_anmation_page.dart';
 import 'package:flutter_anmation_demo/physics_anmation/physics_anmation_page2.dart';
+import 'package:flutter_anmation_demo/use_demo/use_demo.dart';
 import './animate_widget_demo/animate_widget_demo.dart';
 import './tween_animated_builder/tween_animated_builder_demo.dart';
 
@@ -61,6 +62,7 @@ class _MyHomePageState extends State<MyHomePage> {
     'CustomPainter',
     'AnimateWidget',
     'TweenAnimatedBuilder',
+    '应用示例',
   ];
   List _pages = [
     ImplicitAnmationPage(),
@@ -72,6 +74,7 @@ class _MyHomePageState extends State<MyHomePage> {
     CustomPainrerPage(),
     AnimateWidgetDemo(),
     TweenAnimatedBuilderDemo(),
+    UseDemo(),
   ];
 
 

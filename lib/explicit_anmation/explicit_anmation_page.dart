@@ -1,7 +1,8 @@
-import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 
+///显式动画
 class ExplicitAnmationPage extends StatefulWidget {
   @override
   _ExplicitAnmationPageState createState() => _ExplicitAnmationPageState();

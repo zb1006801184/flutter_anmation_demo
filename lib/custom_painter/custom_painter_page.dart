@@ -1,3 +1,8 @@
+/*
+ * @Description: 
+ * @Author: zhubiao
+ * @Date: 2022-03-14 15:31:03
+ */
 import 'dart:math';
 
 import 'package:flutter/material.dart';
@@ -14,7 +19,7 @@ class _CustomPainrerPageState extends State<CustomPainrerPage>
   @override
   void initState() {
     _controller =
-        AnimationController(vsync: this, duration: Duration(milliseconds: 1000))
+        AnimationController(vsync: this, duration: Duration(milliseconds: 4000))
           ..repeat()
           ..addListener(() {
             // print('object');
@@ -39,15 +44,17 @@ class _CustomPainrerPageState extends State<CustomPainrerPage>
         ),
         body: Center(
           child: Container(
-            width: 50,
-            height: 50,
+            width: double.infinity,
+            height: double.infinity,
             child: CustomPaint(
-              painter: DemoPainter(0, _controller.value * pi * 2
-                  // Tween(begin: pi * 1.5, end: pi * 3.5)
-                  //     .chain(CurveTween(curve: Interval(0.5, 1.0)))
-                  //     .evaluate(_controller),
-                  // sin(_controller.value * pi) * pi
-                  ),
+              painter: DemoPainter(
+                0, _controller.value * pi * 2,
+                // Tween(begin: pi * 1.5, end: pi * 3.5)
+                //     .chain(CurveTween(curve: Interval(0.5, 1.0)))
+                //     .evaluate(_controller),
+                // sin(_controller.value * pi) * pi
+                _controller.value,
+              ),
             ),
           ),
         ));
@@ -57,23 +64,55 @@ class _CustomPainrerPageState extends State<CustomPainrerPage>
 class DemoPainter extends CustomPainter {
   final double _arcStart;
   final double _arcSweep;
+  final double value;
 
-  DemoPainter(this._arcStart, this._arcSweep);
+  DemoPainter(this._arcStart, this._arcSweep, this.value);
 
   @override
   void paint(Canvas canvas, Size size) {
-    double side = [size.width, size.height].reduce(min);
     Paint paint = Paint()
-      ..color = Colors.blue
-      ..strokeCap = StrokeCap.round
-      ..strokeWidth = 4.0
-      ..style = PaintingStyle.stroke;
-    canvas.drawArc(
-        Offset.zero & Size(side, side), _arcStart, _arcSweep, false, paint);
+      ..color = Colors.blue //画笔颜色
+      ..strokeCap = StrokeCap.round //线未形状
+      ..strokeWidth = 4.0 //线宽
+      ..style = PaintingStyle.stroke; //是否填充
+    Path path = Path();
+
+        canvas.translate(100, 100);
+
+    //画圆
+    var rect = Rect.fromCenter(center: Offset(0, 0), width: 40, height: 40);
+    path..arcTo(rect, _arcStart, _arcSweep, true);
+    canvas.drawPath(path, paint);
+
+    //划对号
+    path.reset();
+    canvas.translate(0, 200);
+    value <= 0.5
+        ? path.relativeLineTo(10 * (value) * 2, 10 * (value) * 2)
+        : path.relativeLineTo(10, 10);
+    if (value > 0.5)
+      path.relativeLineTo(20 * (value - 0.5) * 2, -20 * (value - 0.5) * 2);
+    canvas.drawPath(path, paint);
+    path.close();
+
+    //开屏动画
+    path.reset();
+    canvas.translate(0, 200);
+    path
+      ..relativeMoveTo(0, 20)
+      ..relativeLineTo(-30, 60)
+      ..relativeLineTo(30, -30)
+      ..relativeLineTo(30, 30)
+      ..close();
+    for (int i = 0; i < 9; i++) {
+      canvas.drawPath(
+          path.transform(Matrix4.rotationZ(i * pi / 4.5 * value).storage), paint);
+    }
   }
 
+  //是否重绘
   @override
   bool shouldRepaint(DemoPainter other) {
-    return _arcStart != other._arcStart || _arcSweep != other._arcSweep;
+    return true;
   }
 }
