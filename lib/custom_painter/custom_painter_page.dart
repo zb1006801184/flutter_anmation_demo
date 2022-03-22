@@ -44,7 +44,7 @@ class _CustomPainrerPageState extends State<CustomPainrerPage>
         ),
         body: Center(
           child: Container(
-            width: double.infinity,
+            // width: double.infinity,
             height: double.infinity,
             child: CustomPaint(
               painter: DemoPainter(
@@ -77,7 +77,7 @@ class DemoPainter extends CustomPainter {
       ..style = PaintingStyle.stroke; //是否填充
     Path path = Path();
 
-        canvas.translate(100, 100);
+        canvas.translate(0, 50);
 
     //画圆
     var rect = Rect.fromCenter(center: Offset(0, 0), width: 40, height: 40);
@@ -86,7 +86,7 @@ class DemoPainter extends CustomPainter {
 
     //划对号
     path.reset();
-    canvas.translate(0, 200);
+    canvas.translate(-10, 50);
     value <= 0.5
         ? path.relativeLineTo(10 * (value) * 2, 10 * (value) * 2)
         : path.relativeLineTo(10, 10);
@@ -97,7 +97,7 @@ class DemoPainter extends CustomPainter {
 
     //开屏动画
     path.reset();
-    canvas.translate(0, 200);
+    canvas.translate(0, 100);
     path
       ..relativeMoveTo(0, 20)
       ..relativeLineTo(-30, 60)
