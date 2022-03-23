@@ -31,7 +31,6 @@ class _AnimateWidgetDemotate extends State<AnimateWidgetDemo>
     //   print('fps');
     // })
     //   ..start();
-
   }
 
   void _animate() {
@@ -67,11 +66,11 @@ class _AnimateWidgetDemotate extends State<AnimateWidgetDemo>
 }
 
 class AnimatedZoomLogo extends AnimatedWidget {
-  AnimatedZoomLogo({Key? key, required Animation<double> animation})
+  late final Animation<double> animation;
+  AnimatedZoomLogo({Key? key, required this.animation})
       : super(key: key, listenable: animation);
 
   Widget build(BuildContext context) {
-    final Animation<double> animation = listenable as Animation<double>;
     return Center(
       child: Container(
         margin: EdgeInsets.symmetric(vertical: 10.0),
