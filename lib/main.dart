@@ -85,10 +85,12 @@ class _MyHomePageState extends State<MyHomePage> {
 
   void _itemClick({required int index}) {
     print(_titles[index]);
-    Navigator.of(context).push(CustomRoutePage(
-      _pages[index],
-      transitionsType: TransitionsType.scale,
-    )
+    Navigator.of(context)
+        .push(MaterialPageRoute(builder: (context) => _pages[index]));
+    return;
+    Navigator.of(context).push(
+      CustomRoutePage(_pages[index],
+            transitionsType: TransitionsType.leftToRight)
         // PageRouteBuilder(
         //   pageBuilder: (context, animation, secondaryAnimation) {
         //     return _pages[index];
