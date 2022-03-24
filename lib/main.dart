@@ -44,7 +44,11 @@ class MyApp extends StatelessWidget {
   }
 }
 
-const textStyle = TextStyle(fontSize: 18, color: Colors.black, fontWeight: FontWeight.w500, decoration: TextDecoration.none);
+const textStyle = TextStyle(
+    fontSize: 18,
+    color: Colors.black,
+    fontWeight: FontWeight.w500,
+    decoration: TextDecoration.none);
 
 class MyHomePage extends StatefulWidget {
   @override
@@ -77,10 +81,26 @@ class _MyHomePageState extends State<MyHomePage> {
     UseDemo(),
   ];
 
-
   void _itemClick({required int index}) {
     print(_titles[index]);
-    Navigator.of(context).push(MaterialPageRoute(builder: (context) => _pages[index]));
+
+    Navigator.of(context).push(
+      PageRouteBuilder(
+        pageBuilder: (context, animation, secondaryAnimation) {
+          return _pages[index];
+        },
+        transitionsBuilder:(context, animation, secondaryAnimation,child) {
+          return SlideTransition(
+            position:
+                Tween<Offset>(begin: Offset(1.0, 0.0), end: Offset(0.0, 0.0))
+                    .animate(CurvedAnimation(
+                        parent: animation, curve: Curves.fastOutSlowIn)),
+            child: child,
+          );
+        },
+        transitionDuration: Duration(milliseconds: 500),
+      ),
+    );
   }
 
   Widget _itemWidget({required int index}) {
