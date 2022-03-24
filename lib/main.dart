@@ -5,6 +5,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_anmation_demo/combined_Animation/combined_animation_page.dart';
 import 'package:flutter_anmation_demo/custom_painter/custom_painter_page.dart';
+import 'package:flutter_anmation_demo/custom_route_page/custom_route_page.dart';
 import 'package:flutter_anmation_demo/explicit_anmation/explicit_anmation_page.dart';
 import 'package:flutter_anmation_demo/hero_anmation/hero_anmation_page.dart';
 import 'package:flutter_anmation_demo/implicit_anmation/implicit_anmation.dart';
@@ -84,7 +85,10 @@ class _MyHomePageState extends State<MyHomePage> {
 
   void _itemClick({required int index}) {
     print(_titles[index]);
-    Navigator.of(context).push(CustomRotuePage(_pages[index])
+    Navigator.of(context).push(CustomRoutePage(
+      _pages[index],
+      transitionsType: TransitionsType.scale,
+    )
         // PageRouteBuilder(
         //   pageBuilder: (context, animation, secondaryAnimation) {
         //     return _pages[index];
@@ -149,43 +153,5 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       body: _bodyWidget(),
     );
-  }
-}
-
-//自定义路由页面
-class CustomRotuePage extends PageRoute {
-  final Widget child;
-  CustomRotuePage(this.child) : super();
-
-  @override
-  Color? get barrierColor => null;
-
-  @override
-  String? get barrierLabel => null;
-
-  @override
-  Widget buildPage(BuildContext context, Animation<double> animation,
-      Animation<double> secondaryAnimation) {
-    return child;
-  }
-
-  @override
-  bool get maintainState => true;
-
-  @override
-  Duration get transitionDuration => Duration(milliseconds: 500);
-
-  @override
-  Widget buildTransitions(BuildContext context, Animation<double> animation,
-      Animation<double> secondaryAnimation, Widget child) {
-    if (isActive) {
-      return SlideTransition(
-        position: Tween<Offset>(begin: Offset(1.0, 0.0), end: Offset(0.0, 0.0))
-            .animate(CurvedAnimation(
-                parent: animation, curve: Curves.fastOutSlowIn)),
-        child: child,
-      );
-    }
-    return super.buildTransitions(context, animation, secondaryAnimation, child);
   }
 }
