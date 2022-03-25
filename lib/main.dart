@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'dart:isolate';
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_anmation_demo/combined_Animation/combined_animation_page.dart';
 import 'package:flutter_anmation_demo/custom_painter/custom_painter_page.dart';
@@ -9,6 +8,7 @@ import 'package:flutter_anmation_demo/custom_route_page/custom_route_page.dart';
 import 'package:flutter_anmation_demo/explicit_anmation/explicit_anmation_page.dart';
 import 'package:flutter_anmation_demo/hero_anmation/hero_anmation_page.dart';
 import 'package:flutter_anmation_demo/implicit_anmation/implicit_anmation.dart';
+import 'package:flutter_anmation_demo/lottie_anmation/lottie_anmation.dart';
 import 'package:flutter_anmation_demo/physics_anmation/physics_anmation_page.dart';
 import 'package:flutter_anmation_demo/physics_anmation/physics_anmation_page2.dart';
 import 'package:flutter_anmation_demo/use_demo/use_demo.dart';
@@ -16,6 +16,7 @@ import './animate_widget_demo/animate_widget_demo.dart';
 import './tween_animated_builder/tween_animated_builder_demo.dart';
 
 void main() {
+    WidgetsFlutterBinding.ensureInitialized();  
   runApp(MyApp());
 }
 
@@ -69,6 +70,7 @@ class _MyHomePageState extends State<MyHomePage> {
     'AnimateWidget',
     'TweenAnimatedBuilder',
     '应用示例',
+    'lottie动画'
   ];
   List _pages = [
     ImplicitAnmationPage(),
@@ -81,13 +83,14 @@ class _MyHomePageState extends State<MyHomePage> {
     AnimateWidgetDemo(),
     TweenAnimatedBuilderDemo(),
     UseDemo(),
+    LottieAnmation(),
   ];
 
   void _itemClick({required int index}) {
     print(_titles[index]);
-    Navigator.of(context)
-        .push(MaterialPageRoute(builder: (context) => _pages[index]));
-    return;
+    // Navigator.of(context)
+    //     .push(MaterialPageRoute(builder: (context) => _pages[index]));
+    // return;
     Navigator.of(context).push(
       CustomRoutePage(_pages[index],
             transitionsType: TransitionsType.leftToRight)
