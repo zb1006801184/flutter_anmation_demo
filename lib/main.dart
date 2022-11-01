@@ -16,7 +16,7 @@ import './animate_widget_demo/animate_widget_demo.dart';
 import './tween_animated_builder/tween_animated_builder_demo.dart';
 
 void main() {
-    WidgetsFlutterBinding.ensureInitialized();  
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(MyApp());
 }
 
@@ -91,9 +91,8 @@ class _MyHomePageState extends State<MyHomePage> {
     // Navigator.of(context)
     //     .push(MaterialPageRoute(builder: (context) => _pages[index]));
     // return;
-    Navigator.of(context).push(
-      CustomRoutePage(_pages[index],
-            transitionsType: TransitionsType.leftToRight)
+    Navigator.of(context).push(CustomRoutePage(_pages[index],
+            currentPage: widget, transitionsType: TransitionsType.transformX)
         // PageRouteBuilder(
         //   pageBuilder: (context, animation, secondaryAnimation) {
         //     return _pages[index];

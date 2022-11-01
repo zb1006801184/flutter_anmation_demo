@@ -26,7 +26,7 @@ class _CustomPainrerPageState extends State<CustomPainrerPage>
             setState(() {});
           });
 
-    // _animation = Tween(begin: 0.0, end: 1.0).animate(_controller);
+    _animation = Tween(begin: 0.0, end: 1.0).animate(_controller);
     super.initState();
   }
 
@@ -48,7 +48,7 @@ class _CustomPainrerPageState extends State<CustomPainrerPage>
             height: double.infinity,
             child: CustomPaint(
               painter: DemoPainter(
-                0, _controller.value * pi * 2,
+                0, _animation.value * pi * 2,
                 // Tween(begin: pi * 1.5, end: pi * 3.5)
                 //     .chain(CurveTween(curve: Interval(0.5, 1.0)))
                 //     .evaluate(_controller),
